@@ -1,0 +1,6 @@
+[book]
+authors = ["yukinotech"]
+language = "cn"
+multilingual = false
+src = "src"
+title = "typescript迷你书"

@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true
+  },
+  "include": ["code/**/*"],
+  "exclude": ["node_modules"]
+}
