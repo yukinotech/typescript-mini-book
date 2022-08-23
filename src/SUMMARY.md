@@ -2,7 +2,7 @@
 
 - [前言](./前言.md)
   - [环境准备](./ch00-环境准备.md)
-  - [typescript 入门](./ch01-typescript入门.md)
+  - [typescript 简介](./ch01-typescript简介.md)
 
 # 进入类型世界
 
