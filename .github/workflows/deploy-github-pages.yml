@@ -24,7 +24,5 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: book
-          branch: main
-          repository-name: typescript-mini-book/typescript-mini-book.github.io
-          token: ${{ secrets.DEPLOY_KEY }}
+          folder: docs
+          branch: gh-page

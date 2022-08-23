@@ -3,3 +3,5 @@ book
 yarn.lock
 
 .DS_Store
+
+docs

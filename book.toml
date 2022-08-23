@@ -4,3 +4,6 @@ language = "cn"
 multilingual = false
 src = "src"
 title = "typescript迷你书"
+
+[build]
+build-dir = "docs"
