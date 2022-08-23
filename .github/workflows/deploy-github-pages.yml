@@ -26,5 +26,5 @@ jobs:
         with:
           folder: book
           branch: main
-          repository-name: typescript-mini-book/typescript-mini-book
+          repository-name: typescript-mini-book/typescript-mini-book.github.io
           token: ${{ secrets.DEPLOY_KEY }}
