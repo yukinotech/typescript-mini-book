@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>环境准备 - typescript迷你书</title>
+        <title>集合之间可以运算 - typescript迷你书</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html" class="active"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-集合之间可以运算.html"><strong aria-hidden="true">2.1.</strong> 集合之间可以运算</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-集合之间可以运算.html" class="active"><strong aria-hidden="true">2.1.</strong> 集合之间可以运算</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -137,41 +137,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="环境准备"><a class="header" href="#环境准备">环境准备</a></h1>
-<blockquote>
-<p>预先善其事，必先利其器。</p>
-</blockquote>
-<h2 id="推荐使用vscode"><a class="header" href="#推荐使用vscode">推荐使用vscode</a></h2>
-<p>笔者推荐使用vscode进行本教程的学习，因为vscode对typescript有着良好的支持。vscode在语言支持上，可以通过插件的形式，支持多种语言类型，但是大多数语言的插件，需要自己下载安装vscode后，去应用市场手动下载安装相应的插件。但typescript的语言功能插件已经预先集成到vscode的安装包中，可以开箱即用，可以说vscode对typescript的支持是开了个后门。</p>
-<p>安装好vscode后，可以在shell里执行以下命令，下载本书的代码片段</p>
-<pre><code class="language-shell">$ git clone https://github.com/yukinotech/typescript-mini-book.git
-</code></pre>
-<pre><code class="language-shell">$ cd ./typescript-mini-book/code
-</code></pre>
-<p>或者直接通过下载项目的zip包，解压后，通过vscode直接打开</p>
-<p>然后进入代码目录，随便打开一个ts文件，可以看到vscode的底部出现一个花括号和typescript的标志，鼠标悬浮到花括号上，单击，可以看到当前typescript指向的<code>tsconfig</code>文件和版本号。</p>
-<p><img src="./img/ch00-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/ts-version.png" alt="ts-version" /></p>
-<p>其中<code>tsconfig</code>指向的一个json文件，里面是用于配置当前ts项目的一些编译和静态分析的配置，我们可以先不用关心它。截止本文撰写时，ts最新稳定版本是<code>4.7.3</code>，当你更新vscode即可获得最新的ts版本，如果你是下载的最新的vscode安装包</p>
-<blockquote>
-<p><strong>P.S.:</strong> 有些朋友可能注意到我截图的ts版本是dev版本，而不是一般的正式版，类似<code>4.7.3</code>这种。这个是通过vscode的额外的插件<code>JavaScript and TypeScript Nightly</code>抢先体验最新版的ts，感兴趣的朋友可以在vscode的应用商店下载。如果你不太了解这个，不必关心这个问题，只要保证你的ts版本较新即可。</p>
-</blockquote>
-<h2 id="自行选择ts版本可选"><a class="header" href="#自行选择ts版本可选">自行选择ts版本（可选）</a></h2>
-<p>如果你想替换当前的ts版本，你可以选择本地安装一个ts,通过@指定ts版本。<code>yarn</code>,<code>npm</code>均可。（<code>npm</code>指令需要依赖<code>node</code>，不了解的可以查找相关资料）</p>
-<pre><code class="language-shell">$ npm i typescript@4.7.3 -dev
-</code></pre>
-<p>安装好后，重启启动一下vscode，还在刚刚截图的地方，选择<code>select version</code>即可找到刚刚下载到本地的ts版本</p>
-<p><img src="./img/ch00-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/select-ts-version.png" alt="select-ts-version" /></p>
-<p>参考资料: https://stackoverflow.com/questions/39668731/what-typescript-version-is-visual-studio-code-using-how-to-update-it</p>
+                        <h1 id="集合之间可以运算"><a class="header" href="#集合之间可以运算">集合之间可以运算</a></h1>
+<p>数学中的集合可以运算，ts的类型也可以运算</p>
+<p>数学中集合的运算</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ch02-类型是一个集合.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a rel="next" href="ch01-typescript入门.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -179,11 +154,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ch02-类型是一个集合.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="ch01-typescript入门.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 

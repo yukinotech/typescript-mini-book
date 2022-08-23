@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>typescript入门 - typescript迷你书</title>
+        <title>typescript 入门 - typescript迷你书</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">2.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html" class="active"><strong aria-hidden="true">3.</strong> typescript入门</a></li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">4.</strong> 类型是一个集合</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html" class="active"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-集合之间可以运算.html"><strong aria-hidden="true">2.1.</strong> 集合之间可以运算</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -137,8 +137,24 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="typescript入门"><a class="header" href="#typescript入门">typescript入门</a></h1>
-<p>typescript是一门微软基于javascript设计的编程语言，</p>
+                        <h1 id="typescript-入门"><a class="header" href="#typescript-入门">typescript 入门</a></h1>
+<p>typescript 是一门微软基于 javascript 设计的编程语言，typescript 有以下几个特点：</p>
+<ol>
+<li>typescript 被设计的最主要的目的，通过本地静态类型分析，检测 js 代码潜在的风险和问题。我们可以来看一段最简单的例子：</li>
+</ol>
+<pre><code class="language-ts">const a = 1
+// ......
+a = 2 // Cannot assign to 'a' because it is a constant.ts(2588)
+</code></pre>
+<p>js 中使用 const 声明的变量，是一个常量，不能再对其进行赋值，否则 runtime 里面会报错。可以看到代码中<code>const a = 1</code>对变量<code>a</code>赋了初始值<code>1</code>，而在后续的代码中，可能是疏忽，或者我们忘记了这个是一个<code>a</code>是一个常量，又对<code>a</code>赋了一个新值<code>2</code>，可以看到 ts 在<code>a = 2</code>这行提示出了错误：<code>Cannot assign to 'a' because it is a constant.ts(2588)</code>。ts 通过对本地代码的静态分析，找出了这个错误，并且提示了出来。</p>
+<p>ts 的分析这个错误的过程是在本地完成的，也就是我们写代码的电脑上。但是 ts 是没有 runtime 的，换句话说，ts 的代码都没法直接在浏览器，nodejs 等环境运行，ts 必须先转换成合法的 js 代码才能运行，而想要知道 js 代码有没有错误，只能丢到浏览器上运行。</p>
+<p>因此，相对于执行的 js 在 runtime（浏览器）中动态抛出错误，ts 可以在本地开发的时候，不在 runtime 里面执行的情况下，提前分析排查代码的潜在问题和错误。</p>
+<ol start="2">
+<li>typescript 是 javascript 的<strong>超集</strong>（superset），这里的'超'指的是范围和特性更广，'集'指的是集合，意思是说任何 js 代码都是合法的 ts 代码。这和 ts 的目标（<a href="https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals">goals</a>）中<code>对齐当前和未来的javascript的提案</code>是一致的。js 每年实现的新特性（ES2021，ES2022 等等），ts 也会支持。</li>
+</ol>
+<blockquote>
+<p>参考资料：https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals</p>
+</blockquote>
 
                     </main>
 

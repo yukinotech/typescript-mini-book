@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">2.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">3.</strong> typescript入门</a></li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">4.</strong> 类型是一个集合</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-集合之间可以运算.html"><strong aria-hidden="true">2.1.</strong> 集合之间可以运算</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,6 +149,7 @@
 <li>新手能轻松入门，老手也能从中学到一些trick</li>
 <li>并不会覆盖ts的方方面面的特性，着重于ts中的一些经验和技巧</li>
 <li>关注ts新特性，本书写作时，ts的稳定版本是<code>4.7.4</code>，本条目会随这ts的版本更新</li>
+<li>每个章节的对应代码片段都在<code>code</code>目录下可以查看</li>
 </ul>
 <p>本书的章节分布：</p>
 <ul>
@@ -181,9 +182,52 @@
 <p>安装好后，重启启动一下vscode，还在刚刚截图的地方，选择<code>select version</code>即可找到刚刚下载到本地的ts版本</p>
 <p><img src="./img/ch00-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/select-ts-version.png" alt="select-ts-version" /></p>
 <p>参考资料: https://stackoverflow.com/questions/39668731/what-typescript-version-is-visual-studio-code-using-how-to-update-it</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="typescript入门"><a class="header" href="#typescript入门">typescript入门</a></h1>
-<p>typescript是一门微软基于javascript设计的编程语言，</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="typescript-入门"><a class="header" href="#typescript-入门">typescript 入门</a></h1>
+<p>typescript 是一门微软基于 javascript 设计的编程语言，typescript 有以下几个特点：</p>
+<ol>
+<li>typescript 被设计的最主要的目的，通过本地静态类型分析，检测 js 代码潜在的风险和问题。我们可以来看一段最简单的例子：</li>
+</ol>
+<pre><code class="language-ts">const a = 1
+// ......
+a = 2 // Cannot assign to 'a' because it is a constant.ts(2588)
+</code></pre>
+<p>js 中使用 const 声明的变量，是一个常量，不能再对其进行赋值，否则 runtime 里面会报错。可以看到代码中<code>const a = 1</code>对变量<code>a</code>赋了初始值<code>1</code>，而在后续的代码中，可能是疏忽，或者我们忘记了这个是一个<code>a</code>是一个常量，又对<code>a</code>赋了一个新值<code>2</code>，可以看到 ts 在<code>a = 2</code>这行提示出了错误：<code>Cannot assign to 'a' because it is a constant.ts(2588)</code>。ts 通过对本地代码的静态分析，找出了这个错误，并且提示了出来。</p>
+<p>ts 的分析这个错误的过程是在本地完成的，也就是我们写代码的电脑上。但是 ts 是没有 runtime 的，换句话说，ts 的代码都没法直接在浏览器，nodejs 等环境运行，ts 必须先转换成合法的 js 代码才能运行，而想要知道 js 代码有没有错误，只能丢到浏览器上运行。</p>
+<p>因此，相对于执行的 js 在 runtime（浏览器）中动态抛出错误，ts 可以在本地开发的时候，不在 runtime 里面执行的情况下，提前分析排查代码的潜在问题和错误。</p>
+<ol start="2">
+<li>typescript 是 javascript 的<strong>超集</strong>（superset），这里的'超'指的是范围和特性更广，'集'指的是集合，意思是说任何 js 代码都是合法的 ts 代码。这和 ts 的目标（<a href="https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals">goals</a>）中<code>对齐当前和未来的javascript的提案</code>是一致的。js 每年实现的新特性（ES2021，ES2022 等等），ts 也会支持。</li>
+</ol>
+<blockquote>
+<p>参考资料：https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="类型是一个集合"><a class="header" href="#类型是一个集合">类型是一个集合</a></h1>
+<h2 id="ts到底在检测啥"><a class="header" href="#ts到底在检测啥">ts到底在检测啥</a></h2>
+<p>在 ts 的世界里面，ts 主要静态检测的，或者回答的问题就是一个类型是不是另一个类型的子类型。我们可以把每个 ts 类型都可以想象成一个集合，上述的问题就变成了一个集合是不是另外一个集合的子集。</p>
+<h2 id="什么是子集"><a class="header" href="#什么是子集">什么是子集</a></h2>
+<p>什么是子集呢？我们说一个集合A包含了另一个集合B里面所有的元素，我们就可以说集合B是集合A的子集。</p>
+<p>用韦恩图来表示就是：</p>
+<p>图1</p>
+<p>我们举个例子：</p>
+<p>集合A有5个元素1，2，3，4，5</p>
+<p>集合B有2个元素1，2</p>
+<p>集合A包含了集合B全部的元素，那么集合B就是集合A的子集</p>
+<h2 id="如何用集合来想象ts"><a class="header" href="#如何用集合来想象ts">如何用集合来想象ts</a></h2>
+<p>听起来有些抽象，我们来看几个 ts 常规的样例：</p>
+<pre><code class="language-ts">const status: number = 1
+</code></pre>
+<p>这里我们声明了一个变量 status，并且指明了它的类型是 number，最后给它赋了一个初值 1。这里就隐藏着一个 ts 静态检测的过程。</p>
+<p>'1'是一个数字，我们把它看做是一个集合，只不过它只有1个元素，'1'。</p>
+<p>number也可以想象成一个集合，只不过它里面有无数个元素，里面可以有'1','2','3','4'等等。</p>
+<p>而这个<code>const status: number = 1</code>这个赋值语句的类型校验是否正确，取决于：1这个集合是不是number这个集合的子集。</p>
+<p>很显然，1是number这个集合的子集，那么ts会认为这段代码是没问题的。</p>
+<p>我们接下来看一个错误的例子</p>
+<pre><code class="language-ts">const status2: number = 'some str' // error
+</code></pre>
+<p>'some str'是一个js字符串字面量变量，它也是有类型的，它的类型就是'some str'，我们也可以先看成只有一个元素的集合，但是很明显，'some str'不在number的集合中，因此'some str'不是number的子集，'some str'不是number的子类型，所以ts就报错了。</p>
+<p>最后总结一下本章的观点：我们把ts中的类型想象成一个集合，而在赋值的操作中</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="集合之间可以运算"><a class="header" href="#集合之间可以运算">集合之间可以运算</a></h1>
+<p>数学中的集合可以运算，ts的类型也可以运算</p>
+<p>数学中集合的运算</p>
 
                     </main>
 
