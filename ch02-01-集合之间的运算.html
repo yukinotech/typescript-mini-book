@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>类型是一个集合 - typescript迷你书</title>
+        <title>集合之间的运算 - typescript迷你书</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="前言.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html" class="active"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-00-如何确定子集关系.html"><strong aria-hidden="true">2.1.</strong> 如何确定子集关系</a></li><li class="chapter-item expanded "><a href="ch02-01-集合之间的运算.html"><strong aria-hidden="true">2.2.</strong> 集合之间的运算</a></li><li class="chapter-item expanded "><a href="ch02-02-全集和空集-unknown和never.html"><strong aria-hidden="true">2.3.</strong> 全集和空集-unknown和never</a></li><li class="chapter-item expanded "><a href="ch02-03-类型全景.html"><strong aria-hidden="true">2.4.</strong> 类型全景</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">类型变换</li><li class="chapter-item expanded "><a href="ch03-类型变换.html"><strong aria-hidden="true">3.</strong> 类型变换</a></li><li class="chapter-item expanded affix "><li class="part-title">其他</li><li class="chapter-item expanded "><a href="ch05-不安全的ts.html"><strong aria-hidden="true">4.</strong> 不安全的ts</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="前言.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-00-如何确定子集关系.html"><strong aria-hidden="true">2.1.</strong> 如何确定子集关系</a></li><li class="chapter-item expanded "><a href="ch02-01-集合之间的运算.html" class="active"><strong aria-hidden="true">2.2.</strong> 集合之间的运算</a></li><li class="chapter-item expanded "><a href="ch02-02-全集和空集-unknown和never.html"><strong aria-hidden="true">2.3.</strong> 全集和空集-unknown和never</a></li><li class="chapter-item expanded "><a href="ch02-03-类型全景.html"><strong aria-hidden="true">2.4.</strong> 类型全景</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">类型变换</li><li class="chapter-item expanded "><a href="ch03-类型变换.html"><strong aria-hidden="true">3.</strong> 类型变换</a></li><li class="chapter-item expanded affix "><li class="part-title">其他</li><li class="chapter-item expanded "><a href="ch05-不安全的ts.html"><strong aria-hidden="true">4.</strong> 不安全的ts</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -137,44 +137,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="类型是一个集合"><a class="header" href="#类型是一个集合">类型是一个集合</a></h1>
-<h2 id="ts到底在检测啥"><a class="header" href="#ts到底在检测啥">ts到底在检测啥</a></h2>
-<p>在 ts 的世界里面，ts 主要静态检测的问题之一就是：<strong>一个类型是不是另一个类型的子类型</strong>。我们下面看一个最简单的例子</p>
-<pre><code class="language-ts">const status: number = 1
+                        <h1 id="集合之间可以运算"><a class="header" href="#集合之间可以运算">集合之间可以运算</a></h1>
+<p>数学中的集合可以运算，ts的类型也可以通过类似的方式变换</p>
+<p>数学中集合的运算可以取交集，也可以取并集。ts中也有类似的概念分别叫做union和intersection，我们完全可以按照集合的观念，直接把它们理解为并集（union）和交集（intersection）。</p>
+<pre><code class="language-ts">type status = 1 | 2 | 3
 </code></pre>
-<p>这里我们声明了一个变量 status，并且通过<code>:</code>的语法指明了它的类型是 number，最后给它赋了一个初值 1。</p>
-<p>这里就隐藏着一个 ts 静态检测的过程。ts会检测1能不能赋给一个number类型的变量，这个过程就是在检验：<strong>1是不是number的一个子类型</strong>。如果1是number的一个子类型，那么这个语句就不会报错，反之就会报错。</p>
-<p>我们可以把每个 ts 类型都可以想象成一个集合，上述的问题就变成了：<strong>一个集合是不是另外一个集合的子集</strong>。</p>
-<h2 id="什么是子集"><a class="header" href="#什么是子集">什么是子集</a></h2>
-<p>什么是子集呢？我们说一个集合A包含了另一个集合B里面所有的元素，我们就可以说集合B是集合A的子集。</p>
-<p>我们举个例子：</p>
-<p>集合A有5个元素1，2，3，4，5</p>
-<p>集合B有2个元素1，2</p>
-<p>用韦恩图来表示就是：</p>
-<p>图1</p>
-<p>其中，集合A包含了集合B全部的元素（1和2），那么集合B就是集合A的子集</p>
-<h2 id="如何用集合来想象ts"><a class="header" href="#如何用集合来想象ts">如何用集合来想象ts</a></h2>
-<p>还是回到最初的例子</p>
-<pre><code class="language-ts">const status: number = 1
-</code></pre>
-<p>'1'是一个数字，我们把它看做是一个集合，只不过它只有1个元素，数字'1'。</p>
-<p>number也可以想象成一个集合，只不过它里面有无数个数字元素，里面可以有'1','2','3','4'等等。</p>
-<p>而这个<code>const status: number = 1</code>这个赋值语句的类型校验是否正确，取决于：1这个集合是不是number这个集合的子集。</p>
-<p>很显然，1是number这个集合的子集，那么ts会认为这段代码是没问题的。</p>
-<p>我们接下来看一个错误的例子</p>
-<pre><code class="language-ts">const status2: number = 'some str' // error
-</code></pre>
-<p>'some str'是一个js字符串字面量变量，它也是有类型的，它的类型就是'some str'，我们也可以先看成只有一个元素的集合，但是很明显，'some str'不在number的集合中，因此'some str'不是number的子集，'some str'不是number的子类型，所以ts就报错了。</p>
-<p>最后总结一下本章的内容：我们把ts中的类型想象成一个集合，而在赋值的操作中，只要满足：右边的值的类型（集合）是左边被赋值的类型（集合）的子类型（子集），ts的静态检查就不会报错。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="ch01-typescript入门.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ch02-00-如何确定子集关系.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="ch02-00-如何确定子集关系.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="ch02-02-全集和空集-unknown和never.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -183,10 +159,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="ch01-typescript入门.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ch02-00-如何确定子集关系.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="ch02-00-如何确定子集关系.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="ch02-02-全集和空集-unknown和never.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

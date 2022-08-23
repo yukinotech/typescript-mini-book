@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html lang="cn" class="sidebar-visible no-js light">
+<html lang="cn" class="sidebar-visible no-js coal">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>前言 - typescript迷你书</title>
+        <title>全集和空集-unknown和never - typescript迷你书</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -30,7 +30,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "coal";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -56,7 +56,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('coal')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html" class="active"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-集合之间可以运算.html"><strong aria-hidden="true">2.1.</strong> 集合之间可以运算</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="前言.html"><strong aria-hidden="true">1.</strong> 前言</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch00-环境准备.html"><strong aria-hidden="true">1.1.</strong> 环境准备</a></li><li class="chapter-item expanded "><a href="ch01-typescript入门.html"><strong aria-hidden="true">1.2.</strong> typescript 入门</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">进入类型世界</li><li class="chapter-item expanded "><a href="ch02-类型是一个集合.html"><strong aria-hidden="true">2.</strong> 类型是一个集合</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-00-如何确定子集关系.html"><strong aria-hidden="true">2.1.</strong> 如何确定子集关系</a></li><li class="chapter-item expanded "><a href="ch02-01-集合之间的运算.html"><strong aria-hidden="true">2.2.</strong> 集合之间的运算</a></li><li class="chapter-item expanded "><a href="ch02-02-全集和空集-unknown和never.html" class="active"><strong aria-hidden="true">2.3.</strong> 全集和空集-unknown和never</a></li><li class="chapter-item expanded "><a href="ch02-03-类型全景.html"><strong aria-hidden="true">2.4.</strong> 类型全景</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">类型变换</li><li class="chapter-item expanded "><a href="ch03-类型变换.html"><strong aria-hidden="true">3.</strong> 类型变换</a></li><li class="chapter-item expanded affix "><li class="part-title">其他</li><li class="chapter-item expanded "><a href="ch05-不安全的ts.html"><strong aria-hidden="true">4.</strong> 不安全的ts</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -93,9 +93,9 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
@@ -137,31 +137,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="前言"><a class="header" href="#前言">前言</a></h1>
-<p>本书旨在分享和沉淀笔者在学习和使用ts中获收获的一些感悟，经验和技巧</p>
-<p>阅读本书的前置知识储备：</p>
-<ul>
-<li>对javascript有一定的了解</li>
-</ul>
-<p>本书的特点和期望：</p>
-<ul>
-<li>新手能轻松入门，老手也能从中学到一些trick</li>
-<li>并不会覆盖ts的方方面面的特性，着重于ts中的一些经验和技巧</li>
-<li>关注ts新特性，本书写作时，ts的稳定版本是<code>4.7.4</code>，本条目会随这ts的版本更新</li>
-<li>每个章节的对应代码片段都在<code>code</code>目录下可以查看</li>
-</ul>
-<p>本书的章节分布：</p>
-<ul>
-<li><strong>ch00-环境准备</strong> 几个vscode搭配ts的小技巧</li>
-<li><strong>ch01-typescript入门</strong> 完全不了解typescript的新手可以从这里开始阅读，有经验的开发者可以略过这个章节</li>
-<li><strong>ch02-类型是一个集合</strong> 从集合的角度探讨ts类型</li>
-</ul>
-
+                        
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="ch00-环境准备.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="prev" href="ch02-01-集合之间的运算.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch02-03-类型全景.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -170,7 +154,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="ch00-环境准备.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="prev" href="ch02-01-集合之间的运算.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch02-03-类型全景.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
