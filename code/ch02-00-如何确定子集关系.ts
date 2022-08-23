@@ -1,0 +1,1 @@
+type isSub = 1 extends number ? true : false // type isSub = true
