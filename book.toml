@@ -7,3 +7,6 @@ title = "typescript迷你书"
 
 [build]
 build-dir = "docs"
+
+[output.html]
+git-repository-url = "https://github.com/yukinotech/typescript-mini-book"
