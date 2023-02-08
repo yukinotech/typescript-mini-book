@@ -10,3 +10,5 @@ build-dir = "docs"
 
 [output.html]
 git-repository-url = "https://github.com/yukinotech/typescript-mini-book"
+default-theme = "rust"
+preferred-dark-theme = "navy"
